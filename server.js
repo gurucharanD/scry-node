@@ -20,6 +20,6 @@ app.use('/api', route)
 app.listen(port, () => {
     console.log("server running")
     db.dbBootsrap();
-    db.dbSeeding();
+    db.bulkInsertData();
 })
 

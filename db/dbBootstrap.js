@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
-const { Seeder } = require('mongo-seeding');
 const config = require('./dbConfig');
 const connectionString = `mongodb://${config.host}:${process.env.mongoport}/${config.db}`
-const path = require('path');
+const sensex = require('./models/sensex')
+const sensexData = require('./data.json')
 
 function dbBootsrap() {
     console.log('bootstraping database')
@@ -23,27 +23,43 @@ function dbBootsrap() {
     });
 }
 
-function dbSeeding() {
-    console.log('seeding data');
-    // const config = {
-    //     database: connectionString,
-    //     dropDatabase: true,
-    // };
-    // const seeder = new Seeder(config);
-    // const collections = seeder.readCollectionsFromPath(path.join(__dirname, '/data.csv'));
-    // seeder
-    //     .import(collections)
-    //     .then(() => {
-    //         console.log('Success');
-    //     })
-    //     .catch(err => {
-    //         console.log('Error', err);
-    //     });
 
+function bulkInsertData() {
+    for (const data of sensexData) {
+        let date;
+        if (data.Date) {
+            let d = new Date(data.Date)
+            date = new Date(d).toLocaleDateString()
+        } else {
+            date = Date.now();
+        }
+        let sensexData = new sensex({
+            Open: data.Open,
+            Close: data.Close,
+            Date: date
+        })
+
+        sensexData.save((err, status) => {
+            if (err) {
+                console.log(err)
+            }
+        })
+    }
 }
 
 
 
+// function bulkInsertData() {
+//     sensex.insertMany(data)
+//         .then((result) => {
+//             console.log("inserted data sucessfully");
+//         })
+//         .catch(err => {
+//             console.error("error ", err);
+//         });
+// }
+
+
 
 module.exports.dbBootsrap = dbBootsrap;
-module.exports.dbSeeding = dbSeeding;
+module.exports.bulkInsertData = bulkInsertData;

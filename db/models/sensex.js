@@ -1,17 +1,23 @@
 const mongoose = require('mongoose')
 const SensexSchema = mongoose.Schema({
-    date: {
+    Date: {
         type: Date,
-        default: Date.now,
-        require: true
+        // default: Date.now,
+        // require: true
     },
-    open: {
+    Open: {
         type: Number,
-        required: true
+        // required: true
     },
-    close: {
+    Close: {
         type: Number,
-        require: true
+        // require: true
+    },
+    High: {
+        type: Number,
+    },
+    Low: {
+        type: Number,
     }
 })
 
