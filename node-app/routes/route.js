@@ -10,8 +10,8 @@ router.post('/fetchsensexdata', async (req, res) => {
 
 router.post('/addsensexdata', async (req, res) => {
     const data = await sensexController.insertData({
-        open: req.body.open,
-        close: req.body.close,
+        open: req.body.Open,
+        close: req.body.Close,
     });
     res.send(data);
 })

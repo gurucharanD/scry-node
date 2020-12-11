@@ -12,4 +12,8 @@ export class AppService {
   public fetchStockData(page) {
     return this.http.post('/api/fetchsensexdata', { page })
   }
+
+  public insertStockData(data) {
+    return this.http.post('/api/addsensexdata', data);
+  }
 }

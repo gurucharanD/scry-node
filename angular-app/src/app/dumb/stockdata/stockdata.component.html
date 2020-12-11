@@ -1,3 +1,12 @@
-<p>
-  stockdata works!
-</p>
+<table id="customers">
+  <tr>
+    <td><b>Open</b></td>
+    <td><b>Close</b></td>
+    <td><b>Date</b></td>
+  </tr>
+  <tr *ngFor="let data of sensexData">
+    <td>{{data.Open}}</td>
+    <td>{{data.Close}}</td>
+    <td>{{data.Date | date:'short':'IST'}}</td>
+  </tr>
+</table>

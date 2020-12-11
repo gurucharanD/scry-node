@@ -1,9 +1,13 @@
 const sensex = require('./models/sensex')
 
-function fetchData(page) {
+async function fetchData(page) {
+    let recordsCount;
+    if (page === 0) {
+        recordsCount = await getRecordCount();
+    }
     return new Promise((resolve, reject) => {
         sensex.find().sort({ Date: 'desc' }).skip(page * 30).limit(30).exec((err, sensexdata) => {
-            err ? reject({ error: err }) : resolve({ sensexdata });
+            err ? reject({ error: err }) : resolve({ sensexdata, recordsCount });
         });
     })
 
@@ -19,6 +23,15 @@ function insertData(data) {
         sensexData.save((err, status) => {
             err ? reject({ error: err }) : resolve({ sensexdata: status });
         })
+    })
+
+}
+
+function getRecordCount() {
+    return new Promise((resolve, reject) => {
+        sensex.count({}, function (err, count) {
+            err ? reject({ error: err }) : resolve(count);
+        });
     })
 
 }

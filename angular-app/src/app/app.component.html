@@ -3,5 +3,12 @@
   <h1>
     Sensex Data
   </h1>
-  <app-stockdata></app-stockdata>
+  <div style="text-align:center">
+
+    <app-modal (dataEvent)="dataAddedEvenHandler($event)"></app-modal>
+  </div>
+  <app-stockdata [sensexData]="stockData"></app-stockdata>
+  <lib-ng-paginator [recordsCount]="recordsCount" (paginatorEvent)="pagination($event)"></lib-ng-paginator>
+
+
 </div>

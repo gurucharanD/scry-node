@@ -1,0 +1,14 @@
+<div>
+  <p-dialog header="Add Data" [(visible)]="display" [modal]="true" [responsive]="true" [width]="350" [minWidth]="200"
+    [minY]="70" [maximizable]="true" [baseZIndex]="10000">
+    <input type="number" pInputText [(ngModel)]="Open" placeholder="Open" />
+    <input type="number" pInputText [(ngModel)]="Close" placeholder="Close" />
+    <p-footer>
+      <button type="button" pButton icon="pi pi-check" (click)="addData()" label="Add"></button>
+      <button type="button" pButton icon="pi pi-close" (click)="display=false" label="Close"
+        class="ui-button-secondary"></button>
+    </p-footer>
+  </p-dialog>
+
+  <button type="button" (click)="showDialog()" pButton icon="pi pi-info-circle" label="Add Data"></button>
+</div>
