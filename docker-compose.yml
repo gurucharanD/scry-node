@@ -1,10 +1,21 @@
 version: "3.7"
 services:
+  client:
+    build:
+      dockerfile: Dockerfile
+      context: ./angular-app
+    volumes:
+      - /app/node_modules
+      - ./angular-app:/app
+    ports:
+      - 4200:4200
   server:
     # restart: always
-    build: .
+    build:
+      dockerfile: dockerfile
+      context: ./node-app
     volumes:
-      - ./:/code
+      - ./node-app:/code
       - /code/node_modules
     environment:
       - mongoport=27017
