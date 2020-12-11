@@ -1,14 +1,14 @@
 version: "3.7"
 services:
-  client:
-    build:
-      dockerfile: Dockerfile
-      context: ./angular-app
-    volumes:
-      - /app/node_modules
-      - ./angular-app:/app
-    ports:
-      - 4200:4200
+  # client:
+  #   build:
+  #     dockerfile: Dockerfile
+  #     context: ./angular-app
+  #   volumes:
+  #     - /app/node_modules
+  #     - ./angular-app:/app
+  #   ports:
+  #     - 4200:4200
   server:
     # restart: always
     build:

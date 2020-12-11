@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const sensexController = require('../db/sensexController');
 
-router.get('/fetchsensexdata', async (req, res) => {
+router.post('/fetchsensexdata', async (req, res) => {
     const page = req.body.page - 1;
     const data = await sensexController.fetchData(page);
     res.send(data);
