@@ -15,8 +15,8 @@ async function fetchData(page) {
 
 function insertData(data) {
     let sensexData = new sensex({
-        Open: data.open,
-        Close: data.close,
+        Open: data.Open,
+        Close: data.Close,
         Date: Date.now()
     })
     return new Promise((resolve, reject) => {

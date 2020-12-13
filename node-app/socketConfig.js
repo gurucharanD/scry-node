@@ -1,3 +1,5 @@
+const sensexController = require('./db/sensexController');
+
 function configureSockets(server) {
     // const server = require('http').createServer(app);
     const io = require('socket.io')(server, {
@@ -11,12 +13,13 @@ function configureSockets(server) {
 
     io.on('connection', socket => {
         console.log('connection established');
-        socket.on('dataAdded', data => {
-            console.log('-->', data)
-            socket.broadcast.emit(data);
+        socket.on('dataAdded', async data => {
+            sensexController.insertData(data).then(response => {
+                response.error ? console.log('error saving data') : socket.broadcast.emit('newdataAdded', data);
+            });
         });
         socket.on('disconnect', () => {
-
+            console.log('connection disconnect');
         });
     });
 }

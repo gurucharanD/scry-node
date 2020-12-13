@@ -14,7 +14,10 @@ export class AppComponent implements OnInit {
   socket: any;
   recordsCount: number;
   constructor(private appService: AppService) {
-
+    this.appService.dataAddedEvent().subscribe(data => {
+      this.stockData.pop();
+      this.stockData.unshift(data);
+    })
   }
   ngOnInit() {
     this.appService.fetchStockData(1).subscribe(data => {
@@ -26,10 +29,7 @@ export class AppComponent implements OnInit {
     event.Date = Date.now();
     this.stockData.pop();
     this.stockData.unshift(event);
-    // this.socket.emit('dataAdded', event);
-    this.appService.insertStockData(event).subscribe(data => {
-      console.log(data)
-    })
+    this.appService.insertStockData(event);
   }
 
   pagination(event) {
