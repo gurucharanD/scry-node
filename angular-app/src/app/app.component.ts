@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppService } from './app.service';
 
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,6 +11,7 @@ import { AppService } from './app.service';
 export class AppComponent implements OnInit {
   title = 'app';
   stockData: any;
+  socket: any;
   recordsCount: number;
   constructor(private appService: AppService) {
 
@@ -24,6 +26,7 @@ export class AppComponent implements OnInit {
     event.Date = Date.now();
     this.stockData.pop();
     this.stockData.unshift(event);
+    // this.socket.emit('dataAdded', event);
     this.appService.insertStockData(event).subscribe(data => {
       console.log(data)
     })

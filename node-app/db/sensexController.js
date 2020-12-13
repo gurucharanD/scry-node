@@ -29,7 +29,7 @@ function insertData(data) {
 
 function getRecordCount() {
     return new Promise((resolve, reject) => {
-        sensex.count({}, function (err, count) {
+        sensex.countDocuments({}, function (err, count) {
             err ? reject({ error: err }) : resolve(count);
         });
     })
