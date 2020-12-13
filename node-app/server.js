@@ -31,7 +31,7 @@ app.use('/', route)
 server.listen(3000, () => {
     console.log("server running")
     db.dbBootsrap();
-    // db.bulkInsertData();
+    db.bulkInsertData();
     sockets.configureSockets(server);
 });
 
