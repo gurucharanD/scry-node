@@ -8,7 +8,7 @@ function dbBootsrap() {
     console.log('bootstraping database')
     mongoose.connect(connectionString, { useNewUrlParser: true })
     mongoose.connection.on('connected', () => {
-        console.log('connected to db at port:27017')
+        console.log('connected to db at port:', process.env.mongoport)
     })
     //Db connection failure
     mongoose.connection.on('error', (err) => {
